@@ -2,6 +2,7 @@
 
 namespace App\Exceptions;
 
+use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
 
@@ -26,5 +27,19 @@ class Handler extends ExceptionHandler
         $this->reportable(function (Throwable $e) {
             //
         });
+    }
+
+    public function render($request, Throwable $e): \Illuminate\Http\Response|\Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+    {
+        if ($e instanceof Exception) {
+            $code = $e->getCode() ? $e->getCode() : 500;
+            return response()->json(
+                [
+                    'message' => $e->getMessage(),
+                ],
+                $code
+            );
+        }
+        return parent::render($request, $e);
     }
 }

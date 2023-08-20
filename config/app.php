@@ -185,4 +185,7 @@ return [
         // 'Example' => App\Facades\Example::class,
     ])->toArray(),
 
+    'jwt_algo' => env('JWT_ALGO'),
+    'jwt_public_key' => env('JWT_PUBLIC_KEY'),
+    'jwt_private_key' => env('JWT_PRIVATE_KEY')
 ];

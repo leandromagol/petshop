@@ -40,6 +40,10 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
+        'api_jwt' => [
+            'driver' => 'custom_jwt',
+            'provider' => 'firebase_jwt',
+        ],
     ],
 
     /*
@@ -63,6 +67,9 @@ return [
         'users' => [
             'driver' => 'eloquent',
             'model' => App\Models\User::class,
+        ],
+        'firebase_jwt' => [
+            'driver' => 'firebase_jwt',
         ],
 
         // 'users' => [
