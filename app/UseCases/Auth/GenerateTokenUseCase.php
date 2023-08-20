@@ -1,9 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\UseCases\Auth;
 
 use App\Models\JwtToken;
-use App\Models\User;
 use Firebase\JWT\JWT;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Support\Facades\Auth;
@@ -16,10 +17,6 @@ use Illuminate\Support\Str;
 class GenerateTokenUseCase
 {
     /**
-     * @param string $email
-     * @param string $password
-     *
-     * @return string|null
      * @throws AuthenticationException
      */
     public function __invoke(string $email, string $password): ?string
@@ -43,12 +40,11 @@ class GenerateTokenUseCase
 
     private function storeJwt($user): void
     {
-
         JwtToken::create([
-            'user_id'=> $user->uuid,
-            'unique_id'=> Str::uuid()->toString(),
-            'token_title'=>'authorization',
-            'last_used_at'=>now(),
+            'user_id' => $user->uuid,
+            'unique_id' => Str::uuid()->toString(),
+            'token_title' => 'authorization',
+            'last_used_at' => now(),
         ]);
     }
 }

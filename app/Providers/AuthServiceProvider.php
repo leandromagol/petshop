@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Providers;
 
 use App\Guards\FirebaseJWTGuard;
@@ -14,8 +16,8 @@ class AuthServiceProvider extends ServiceProvider
      *
      * @var array<class-string, class-string>
      */
-    protected $policies = [
-        //
+    protected array $policies = [
+
     ];
 
     /**

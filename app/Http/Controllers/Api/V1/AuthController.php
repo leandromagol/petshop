@@ -1,10 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Requests\Auth\LoginAuthRequest;
 use App\UseCases\Auth\GenerateTokenUseCase;
-use App\UseCases\Auth\LogoutUseCase;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Support\Facades\Auth;
 
@@ -44,6 +45,7 @@ class AuthController
      *         description="Validation error"
      *     ),
      * )
+     *
      * @throws AuthenticationException
      */
     public function login(LoginAuthRequest $request): \Illuminate\Http\JsonResponse
@@ -75,7 +77,6 @@ class AuthController
      *         )
      *     ),
      * )
-     *
      */
 
     public function logout(): \Illuminate\Http\JsonResponse

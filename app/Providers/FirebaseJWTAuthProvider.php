@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Providers;
 
 use App\Models\User;
@@ -16,15 +18,15 @@ class FirebaseJWTAuthProvider implements UserProvider
         return null;
     }
 
-    public function retrieveById($identifier)
+    public function retrieveById($identifier): void
     {
     }
 
-    public function retrieveByToken($identifier, $token)
+    public function retrieveByToken($identifier, $token): void
     {
     }
 
-    public function updateRememberToken(Authenticatable $user, $token)
+    public function updateRememberToken(Authenticatable $user, $token): void
     {
     }
 

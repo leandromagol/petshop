@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers;
 
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
@@ -11,6 +13,7 @@ use Illuminate\Routing\Controller as BaseController;
  *    title="Your super  ApplicationAPI",
  *    version="1.0.0",
  * )
+ *
  * @OA\SecurityScheme(
  *     type="http",
  *     in="header",

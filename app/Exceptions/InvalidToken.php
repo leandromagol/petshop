@@ -1,8 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Exceptions;
 
+/**
+ *
+ */
 class InvalidToken extends BaseApi
 {
-    protected $code = 422;
+    protected int $code = 422;
 }

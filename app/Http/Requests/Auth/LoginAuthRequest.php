@@ -1,9 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Requests\Auth;
 
 use App\Http\Requests\BaseRequest;
 use Illuminate\Contracts\Validation\ValidationRule;
+
 /**
  * @OA\Schema(
  *     title="Login Request",
@@ -36,5 +39,4 @@ class LoginAuthRequest extends BaseRequest
             'password' => 'required|string|min:4',
         ];
     }
-
 }

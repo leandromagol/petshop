@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Requests;
 
 use Illuminate\Contracts\Validation\Validator;
@@ -12,7 +14,7 @@ class BaseRequest extends FormRequest
     {
         return true;
     }
-    protected function failedValidation(Validator $validator)
+    protected function failedValidation(Validator $validator): void
     {
         throw new HttpResponseException(response()->json([
             'errors' => $validator->errors(),

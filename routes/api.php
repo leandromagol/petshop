@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use App\Http\Controllers\Api\V1\AuthController;
 use Illuminate\Support\Facades\Route;
 
@@ -13,10 +15,9 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "api" middleware group. Make something great!
 |
 */
-Route::prefix('v1')->group(function (){
-    Route::controller(AuthController::class)->prefix('auth')->group(function (){
-        Route::post('login','login');
-        Route::get('logout','logout')->middleware('auth:api_jwt');
+Route::prefix('v1')->group(function (): void {
+    Route::controller(AuthController::class)->prefix('auth')->group(function (): void {
+        Route::post('login', 'login');
+        Route::get('logout', 'logout')->middleware('auth:api_jwt');
     });
 });
-

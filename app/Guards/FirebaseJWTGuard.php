@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Guards;
 
 use App\Exceptions\InvalidToken;
@@ -14,9 +16,11 @@ use Illuminate\Http\Request;
 class FirebaseJWTGuard implements Guard
 {
     use GuardHelpers;
+
     protected Request $request;
     protected $provider;
     protected mixed $jwt_algo;
+
     public function __construct(UserProvider $provider, Request $request)
     {
         $this->provider = $provider;
@@ -24,43 +28,36 @@ class FirebaseJWTGuard implements Guard
         $this->jwt_algo = config('app.jwt_algo');
     }
 
-    /**
-     * @throws InvalidToken
-     * @throws TokenNotProvided
-     */
     public function user(): ?\Illuminate\Contracts\Auth\Authenticatable
     {
         if (! is_null($this->user)) {
             return $this->user;
         }
+
         try {
-            $token = $this->decodeToken($this->getTokenForRequest());
-            return $this->provider->retrieveByCredentials((array) $token);
+            return $this->provider->retrieveByCredentials(
+                (array) $this->decodeToken($this->getTokenForRequest())
+            );
         } catch (\Exception $e) {
             throw new InvalidToken($e->getMessage());
         }
     }
 
-    /**
-     * @throws InvalidToken
-     * @throws TokenNotProvided
-     */
     public function validate(array $credentials = []): bool|\Illuminate\Contracts\Auth\Authenticatable|null
     {
-        if (! isset($credentials['token'])) {
-            return false;
-        }
+        $token = $credentials['token'] ?? null;
+
         try {
-            $token = $this->decodeToken($this->getTokenForRequest());
-            if ($this->provider->retrieveByCredentials(['uuid' => $token->user_uuid])) {
-                return true;
-            }
-        }catch (\Exception $e) {
+            $tokenData = $this->decodeToken($this->getTokenForRequest());
+            return $this->provider->retrieveByCredentials(['uuid' => $tokenData->user_uuid]);
+        } catch (\Exception $e) {
             return false;
         }
+    }
 
-        return false;
-
+    public function logout(): void
+    {
+        $this->user()->jwtTokens()->delete();
     }
 
     protected function decodeToken(string $token): object
@@ -75,19 +72,11 @@ class FirebaseJWTGuard implements Guard
     protected function getTokenForRequest(): string
     {
         $token = $this->request->bearerToken();
+
         if ($token === null) {
             throw new TokenNotProvided();
         }
+
         return $token;
-    }
-
-    /**
-     * @throws InvalidToken
-     * @throws TokenNotProvided
-     */
-    public function logout()
-    {
-        $this->user()->jwtTokens()->delete();
-
     }
 }

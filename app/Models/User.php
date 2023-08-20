@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Auth\Authenticatable as AuthenticatableTrait;
 use Illuminate\Contracts\Auth\Authenticatable;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Auth\Authenticatable as AuthenticatableTrait;
+
 /**
  * App\Models\User
  *
@@ -17,7 +20,7 @@ use Illuminate\Auth\Authenticatable as AuthenticatableTrait;
  * @property int $is_admin
  * @property string $email
  * @property \Illuminate\Support\Carbon|null $email_verified_at
- * @property mixed $password
+ * @property string $password
  * @property string|null $avatar
  * @property string|null $address
  * @property string|null $phone_number
@@ -25,10 +28,12 @@ use Illuminate\Auth\Authenticatable as AuthenticatableTrait;
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property string|null $last_login_at
+ *
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\JwtToken> $jwtTokens
  * @property-read int|null $jwt_tokens_count
  * @property-read \Illuminate\Notifications\DatabaseNotificationCollection<int, \Illuminate\Notifications\DatabaseNotification> $notifications
  * @property-read int|null $notifications_count
+ *
  * @method static \Database\Factories\UserFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder|User newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|User newQuery()
@@ -48,6 +53,7 @@ use Illuminate\Auth\Authenticatable as AuthenticatableTrait;
  * @method static \Illuminate\Database\Eloquent\Builder|User wherePhoneNumber($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereUuid($value)
+ *
  * @mixin \Eloquent
  */
 class User extends Model implements Authenticatable
@@ -61,7 +67,7 @@ class User extends Model implements Authenticatable
      *
      * @var array<int, string>
      */
-    protected $fillable = [
+    protected array $fillable = [
         'name',
         'email',
         'password',
@@ -72,7 +78,7 @@ class User extends Model implements Authenticatable
      *
      * @var array<int, string>
      */
-    protected $hidden = [
+    protected array $hidden = [
         'password',
         'remember_token',
     ];
@@ -82,7 +88,7 @@ class User extends Model implements Authenticatable
      *
      * @var array<string, string>
      */
-    protected $casts = [
+    protected array $casts = [
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];

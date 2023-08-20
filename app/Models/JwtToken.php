@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -19,7 +21,9 @@ use Illuminate\Database\Eloquent\Model;
  * @property string|null $expires_at
  * @property string|null $last_used_at
  * @property string|null $refreshed_at
+ *
  * @property-read \App\Models\User $user
+ *
  * @method static \Illuminate\Database\Eloquent\Builder|JwtToken newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|JwtToken newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|JwtToken query()
@@ -34,6 +38,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|JwtToken whereUniqueId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|JwtToken whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|JwtToken whereUserId($value)
+ *
  * @mixin \Eloquent
  */
 class JwtToken extends Model
@@ -44,7 +49,7 @@ class JwtToken extends Model
      *
      * @var array<int, string>
      */
-    protected $fillable = [
+    protected array $fillable = [
         'user_id',
         'unique_id',
         'token_title',
@@ -59,7 +64,7 @@ class JwtToken extends Model
      *
      * @var array<string, string>
      */
-    protected $casts = [
+    protected array $casts = [
         'restrictions' => 'json',
         'permissions' => 'json',
     ];
@@ -68,5 +73,4 @@ class JwtToken extends Model
     {
         return $this->belongsTo(User::class, 'user_id', 'uuid');
     }
-
 }
