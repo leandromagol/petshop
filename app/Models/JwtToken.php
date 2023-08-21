@@ -49,7 +49,7 @@ class JwtToken extends Model
      *
      * @var array<int, string>
      */
-    protected array $fillable = [
+    protected $fillable = [
         'user_id',
         'unique_id',
         'token_title',
@@ -64,11 +64,14 @@ class JwtToken extends Model
      *
      * @var array<string, string>
      */
-    protected array $casts = [
+    protected $casts = [
         'restrictions' => 'json',
         'permissions' => 'json',
     ];
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(User::class, 'user_id', 'uuid');

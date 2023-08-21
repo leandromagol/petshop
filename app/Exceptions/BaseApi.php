@@ -8,5 +8,8 @@ use Exception;
 
 class BaseApi extends Exception
 {
-    protected int $code = 500;
+    /**
+     * @var int
+     */
+    protected  $code = 500;
 }

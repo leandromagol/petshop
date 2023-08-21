@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\UseCases\Auth;
 
 use App\Models\JwtToken;
+use App\Models\User;
 use Firebase\JWT\JWT;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Support\Facades\Auth;
@@ -23,22 +24,30 @@ class GenerateTokenUseCase
     {
         $credentials = ['email' => $email, 'password' => $password];
         if (Auth::attempt($credentials)) {
+
             $user = Auth::user();
-            $privateKey = config('app.jwt_private_key');
-            $token = JWT::encode([
-                'sub' => $user->id,
-                'user_uuid' => $user->uuid,
-                'iat' => time(),
-                'exp' => time() + (60 * 60), // Token expiration time (1 hour)
-                'iss' => URL::to('/'),
-            ], $privateKey, config('app.jwt_algo'));
-            $this->storeJwt($user);
-            return $token;
+            if ($user instanceof User){
+                $privateKey = config('app.jwt_private_key');
+                $token = JWT::encode([
+                    'sub' => $user->id,
+                    'user_uuid' => $user->uuid,
+                    'iat' => time(),
+                    'exp' => time() + (60 * 60), // Token expiration time (1 hour)
+                    'iss' => URL::to('/'),
+                ], $privateKey, config('app.jwt_algo'));
+                $this->storeJwt($user);
+                return $token;
+            }
         }
         throw new AuthenticationException();
     }
 
-    private function storeJwt($user): void
+
+    /**
+     * @param User $user
+     * @return void
+     */
+    private function storeJwt(User $user): void
     {
         JwtToken::create([
             'user_id' => $user->uuid,

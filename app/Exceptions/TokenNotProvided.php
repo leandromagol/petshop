@@ -9,6 +9,12 @@ namespace App\Exceptions;
  */
 class TokenNotProvided extends BaseApi
 {
-    protected string $message = 'Token not provided';
-    protected int $code = 422;
+    /**
+     * @var string
+     */
+    protected  $message = 'Token not provided';
+    /**
+     * @var int
+     */
+    protected  $code = 422;
 }

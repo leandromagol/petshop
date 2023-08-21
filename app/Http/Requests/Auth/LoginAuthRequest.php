@@ -8,6 +8,8 @@ use App\Http\Requests\BaseRequest;
 use Illuminate\Contracts\Validation\ValidationRule;
 
 /**
+ * @property string $email
+ * @property string $password
  * @OA\Schema(
  *     title="Login Request",
  *     description="Login request payload",
@@ -30,7 +32,7 @@ class LoginAuthRequest extends BaseRequest
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array<string, ValidationRule|array|string>
+     * @return array<string, ValidationRule|string>
      */
     public function rules(): array
     {

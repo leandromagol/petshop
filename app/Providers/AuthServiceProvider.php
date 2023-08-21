@@ -5,10 +5,14 @@ declare(strict_types=1);
 namespace App\Providers;
 
 use App\Guards\FirebaseJWTGuard;
+use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
+/**
+ *
+ */
 class AuthServiceProvider extends ServiceProvider
 {
     /**
@@ -16,7 +20,7 @@ class AuthServiceProvider extends ServiceProvider
      *
      * @var array<class-string, class-string>
      */
-    protected array $policies = [
+    protected $policies = [
 
     ];
 
@@ -27,10 +31,7 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        Auth::provider('firebase_jwt', function () {
-            return new FirebaseJWTAuthProvider();
-        });
-        Auth::extend('custom_jwt', function ($app, $name, array $config) {
+        Auth::extend('custom_jwt', function (Application $app, $name, array $config) {
             return new FirebaseJWTGuard(
                 Auth::createUserProvider($config['provider']),
                 $app->make(Request::class)

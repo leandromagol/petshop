@@ -24,7 +24,7 @@ class UserFactory extends Factory
             'is_admin' => fake()->boolean,
             'email' => fake()->unique()->safeEmail,
             'email_verified_at' => now(),
-            'password' => bcrypt('password'), // You can change this to generate a random password
+            'password' => ('password'), // You can change this to generate a random password
             'avatar' => null,
             'address' => fake()->address,
             'phone_number' => fake()->phoneNumber,

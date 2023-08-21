@@ -67,7 +67,7 @@ class User extends Model implements Authenticatable
      *
      * @var array<int, string>
      */
-    protected array $fillable = [
+    protected $fillable = [
         'name',
         'email',
         'password',
@@ -78,7 +78,7 @@ class User extends Model implements Authenticatable
      *
      * @var array<int, string>
      */
-    protected array $hidden = [
+    protected $hidden = [
         'password',
         'remember_token',
     ];
@@ -88,11 +88,14 @@ class User extends Model implements Authenticatable
      *
      * @var array<string, string>
      */
-    protected array $casts = [
+    protected $casts = [
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function jwtTokens(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(JwtToken::class, 'user_id', 'uuid');

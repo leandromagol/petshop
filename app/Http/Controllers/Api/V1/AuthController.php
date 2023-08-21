@@ -5,8 +5,10 @@ declare(strict_types=1);
 namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Requests\Auth\LoginAuthRequest;
+use App\Models\JwtToken;
 use App\UseCases\Auth\GenerateTokenUseCase;
 use Illuminate\Auth\AuthenticationException;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 /**
@@ -52,8 +54,8 @@ class AuthController
     {
         $generateTokenUseCase = new GenerateTokenUseCase();
         $token = $generateTokenUseCase(
-            $request->input('email'),
-            $request->input('password')
+            $request->email,
+            $request->password
         );
         if ($token) {
             return response()->json(['token' => $token]);
@@ -79,10 +81,13 @@ class AuthController
      * )
      */
 
-    public function logout(): \Illuminate\Http\JsonResponse
+    public function logout(Request $request): \Illuminate\Http\JsonResponse
     {
-        Auth::logout();
+        $user = $request->user();
 
+        if ($user) {
+            JwtToken::where('user_id', $user->uuid)->delete();
+        }
         return response()->json([
             'message' => 'Successfully logged out',
         ]);
