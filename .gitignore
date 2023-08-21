@@ -19,3 +19,4 @@ yarn-error.log
 /.vscode
 /private_key.pem
 /public_key.pem
+/nginx/logs/*.log

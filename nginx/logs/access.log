@@ -109,3 +109,6 @@
 172.24.0.1 - - [21/Aug/2023:16:16:04 +0000] "GET /api/v1/logout HTTP/1.1" 500 70 "-" "insomnia/2023.3.0"
 172.24.0.1 - - [21/Aug/2023:16:16:10 +0000] "GET /api/v1/auth/logout HTTP/1.1" 500 16592 "-" "insomnia/2023.3.0"
 172.24.0.1 - - [21/Aug/2023:16:16:17 +0000] "GET /api/v1/auth/logout HTTP/1.1" 500 24891 "-" "insomnia/2023.3.0"
+172.24.0.1 - - [21/Aug/2023:17:08:17 +0000] "GET /api/documentation HTTP/1.1" 200 2071 "-" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36"
+172.24.0.1 - - [21/Aug/2023:17:08:17 +0000] "GET /docs/asset/swagger-ui-bundle.js?v=ea94a6052d037a1e90c46641afd9299a HTTP/1.1" 200 1448291 "http://localhost/api/documentation" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36"
+172.24.0.1 - - [21/Aug/2023:17:08:17 +0000] "GET /docs/api-docs.json HTTP/1.1" 200 4000 "http://localhost/api/documentation" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36"
