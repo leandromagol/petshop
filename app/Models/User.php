@@ -8,7 +8,6 @@ use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
-
 /**
  * App\Models\User
  *
@@ -67,9 +66,14 @@ class User extends Model implements Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
-        'email',
-        'password',
+        'first_name' ,
+        'last_name' ,
+        'email' ,
+        'password' ,
+        'avatar',
+        'address',
+        'phone_number',
+        'uuid'
     ];
 
     /**

@@ -5,6 +5,51 @@
         "version": "1.0.0"
     },
     "paths": {
+        "/api/v1/admin/create": {
+            "post": {
+                "tags": [
+                    "Admin"
+                ],
+                "summary": "Create a new admin",
+                "operationId": "createAdmin",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CreateAdminRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Admin created successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Admin created successfully"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation error"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
         "/api/v1/auth/login": {
             "post": {
                 "tags": [
@@ -83,6 +128,52 @@
     },
     "components": {
         "schemas": {
+            "CreateAdminRequest": {
+                "title": "Create Admin Request",
+                "description": "Request payload for creating a new admin",
+                "required": [
+                    "first_name",
+                    "last_name",
+                    "email",
+                    "password"
+                ],
+                "properties": {
+                    "first_name": {
+                        "type": "string",
+                        "example": "John"
+                    },
+                    "last_name": {
+                        "type": "string",
+                        "example": "Doe"
+                    },
+                    "email": {
+                        "type": "string",
+                        "format": "email",
+                        "example": "john@example.com"
+                    },
+                    "password": {
+                        "type": "string",
+                        "format": "password",
+                        "example": "password123"
+                    },
+                    "avatar": {
+                        "type": "string",
+                        "example": "avatar.jpg",
+                        "nullable": true
+                    },
+                    "address": {
+                        "type": "string",
+                        "example": "123 Street, City",
+                        "nullable": true
+                    },
+                    "phone_number": {
+                        "type": "string",
+                        "example": "123-456-7890",
+                        "nullable": true
+                    }
+                },
+                "type": "object"
+            },
             "LoginAuthRequest": {
                 "title": "Login Request",
                 "description": "Login request payload",

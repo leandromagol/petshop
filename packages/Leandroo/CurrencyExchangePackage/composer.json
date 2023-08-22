@@ -1,0 +1,24 @@
+{
+    "name": "leandroo/currency-exchange-package",
+    "description": "Currency exchange package for laravel",
+    "autoload": {
+        "psr-4": {
+                "Leandroo\\CurrencyExchangePackage\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Leandroo\\CurrencyExchangePackage\\Support\\CurrencyExchangeProvider"
+            ]
+        }
+    },
+    "authors": [
+        {
+            "name": "Leandro Oliveira"
+        }
+    ],
+    "require": {
+        "php": "^8.1"
+    }
+}

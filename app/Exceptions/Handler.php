@@ -31,15 +31,12 @@ class Handler extends ExceptionHandler
 
     public function render($request, Throwable $e): \Illuminate\Http\Response|\Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse|\Symfony\Component\HttpFoundation\Response
     {
-        if ($e instanceof Exception) {
-            $code = $e->getCode() ? $e->getCode() : 500;
-            return response()->json(
-                [
-                    'message' => $e->getMessage(),
-                ],
-                $code
-            );
-        }
-        return parent::render($request, $e);
+        $code = $e->getCode() ? $e->getCode() : 500;
+        return response()->json(
+            [
+                'message' => $e->getMessage(),
+            ],
+            $code
+        );
     }
 }
