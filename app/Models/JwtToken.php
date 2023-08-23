@@ -20,9 +20,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string|null $expires_at
  * @property string|null $last_used_at
  * @property string|null $refreshed_at
- *
  * @property-read \App\Models\User $user
- *
  * @method static \Illuminate\Database\Eloquent\Builder|JwtToken newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|JwtToken newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|JwtToken query()
@@ -37,7 +35,6 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|JwtToken whereUniqueId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|JwtToken whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|JwtToken whereUserId($value)
- *
  * @mixin \Eloquent
  */
 class JwtToken extends Model

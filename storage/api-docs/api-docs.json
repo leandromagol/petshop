@@ -124,6 +124,292 @@
                     }
                 ]
             }
+        },
+        "/api/v1/product": {
+            "get": {
+                "tags": [
+                    "Products"
+                ],
+                "summary": "List all products",
+                "description": "Retrieves a list of all products.",
+                "operationId": "listProducts",
+                "parameters": [
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "Number of products to retrieve (optional)",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "minimum": 1
+                        }
+                    },
+                    {
+                        "name": "sort_by",
+                        "in": "query",
+                        "description": "Sort products by field (optional)",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "enum": [
+                                "title",
+                                "price",
+                                "description"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "desc",
+                        "in": "query",
+                        "description": "Sort in descending order (optional)",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "enum": [
+                                0,
+                                1
+                            ]
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Products retrieved successfully"
+                                        },
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/Product"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/product/create": {
+            "post": {
+                "tags": [
+                    "Products"
+                ],
+                "summary": "Create a new product",
+                "description": "Creates a new product.",
+                "operationId": "createProduct",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CreateProductRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Product created successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Product created successfully"
+                                        },
+                                        "product": {
+                                            "$ref": "#/components/schemas/Product"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/product/{uuid}": {
+            "get": {
+                "tags": [
+                    "Products"
+                ],
+                "summary": "Get product by UUID",
+                "description": "Retrieves a product by its UUID.",
+                "operationId": "getProductByUuid",
+                "parameters": [
+                    {
+                        "name": "uuid",
+                        "in": "path",
+                        "description": "UUID of the product",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Product retrieved successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Product retrieved successfully"
+                                        },
+                                        "data": {
+                                            "$ref": "#/components/schemas/Product"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Product not found"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Products"
+                ],
+                "summary": "Update a product",
+                "description": "Updates an existing product.",
+                "operationId": "updateProduct",
+                "parameters": [
+                    {
+                        "name": "uuid",
+                        "in": "path",
+                        "description": "UUID of the product",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UpdateProductRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Product updated successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Product updated successfully"
+                                        },
+                                        "data": {
+                                            "$ref": "#/components/schemas/Product"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Product not found"
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Products"
+                ],
+                "summary": "Delete a product",
+                "description": "Deletes an existing product.",
+                "operationId": "deleteProduct",
+                "parameters": [
+                    {
+                        "name": "uuid",
+                        "in": "path",
+                        "description": "UUID of the product",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Product deleted successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Product deleted successfully"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Product not found"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
         }
     },
     "components": {
@@ -192,6 +478,150 @@
                     }
                 },
                 "type": "object"
+            },
+            "CreateProductRequest": {
+                "title": "Create Product Request",
+                "description": "Create Product Request Body",
+                "required": [
+                    "title",
+                    "price",
+                    "description",
+                    "metadata"
+                ],
+                "properties": {
+                    "title": {
+                        "description": "Title of the product",
+                        "type": "string",
+                        "example": "Pet Food"
+                    },
+                    "price": {
+                        "description": "Price of the product",
+                        "type": "number",
+                        "format": "float",
+                        "example": 19.99
+                    },
+                    "description": {
+                        "description": "Description of the product",
+                        "type": "string",
+                        "example": "High-quality pet food for all breeds."
+                    },
+                    "metadata": {
+                        "description": "Metadata of the product",
+                        "type": "object",
+                        "example": {
+                            "brand": "UUID from petshop.brands",
+                            "image": "UUID from petshop.files"
+                        }
+                    }
+                },
+                "type": "object"
+            },
+            "ListProductRequest": {
+                "title": "ListProductRequest",
+                "description": "List Product Request",
+                "properties": {
+                    "limit": {
+                        "type": "integer",
+                        "example": 10
+                    },
+                    "sort_by": {
+                        "type": "string",
+                        "enum": [
+                            "title",
+                            "price",
+                            "description"
+                        ]
+                    },
+                    "desc": {
+                        "type": "integer",
+                        "enum": [
+                            0,
+                            1
+                        ]
+                    }
+                },
+                "type": "object"
+            },
+            "UpdateProductRequest": {
+                "title": "UpdateProductRequest",
+                "description": "Update Product Request",
+                "required": [
+                    "title",
+                    "price",
+                    "description",
+                    "metadata"
+                ],
+                "properties": {
+                    "title": {
+                        "description": "Title of the product",
+                        "type": "string",
+                        "example": "Updated Product"
+                    },
+                    "price": {
+                        "type": "number",
+                        "format": "float",
+                        "example": 39.99
+                    },
+                    "description": {
+                        "type": "string",
+                        "example": "This is the updated product description."
+                    },
+                    "metadata": {
+                        "type": "object",
+                        "example": {
+                            "key": "updated_value"
+                        }
+                    }
+                },
+                "type": "object"
+            },
+            "Product": {
+                "title": "Product",
+                "description": "Product model",
+                "properties": {
+                    "id": {
+                        "description": "App\\Models\\Product",
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "uuid": {
+                        "type": "string",
+                        "example": "c9d5ec94-2357-4d64-9a62-5b06d8110130"
+                    },
+                    "title": {
+                        "type": "string",
+                        "example": "Sample Product"
+                    },
+                    "price": {
+                        "type": "number",
+                        "format": "float",
+                        "example": 29.99
+                    },
+                    "description": {
+                        "type": "string",
+                        "example": "This is a sample product description."
+                    },
+                    "metadata": {
+                        "type": "object",
+                        "example": {
+                            "key": "value"
+                        }
+                    },
+                    "created_at": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "updated_at": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "deleted_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "nullable": true
+                    }
+                },
+                "type": "object"
             }
         },
         "securitySchemes": {
@@ -208,6 +638,10 @@
         {
             "name": "Authentication",
             "description": "Endpoints for user authentication"
+        },
+        {
+            "name": "Products",
+            "description": "API Endpoints for Products"
         }
     ]
 }

@@ -44,7 +44,10 @@ RUN chown -R www-data:www-data \
 # Assign writing permissions to logs and framework directories
 RUN chmod 775 storage/logs \
         /var/www/storage/framework/sessions \
-        /var/www/storage/framework/views
-# Expose port 9000 and start php-fpm server
+        /var/www/storage/framework/views \
+
+# Run sh to generate openssl keys to authentication
+RUN ./generate_auth_keys.sh
+
 EXPOSE 9000
 CMD ["php-fpm"]

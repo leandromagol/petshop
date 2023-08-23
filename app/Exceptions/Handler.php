@@ -4,7 +4,9 @@
 namespace App\Exceptions;
 
 use Exception;
+use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Validation\UnauthorizedException;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -31,12 +33,15 @@ class Handler extends ExceptionHandler
 
     public function render($request, Throwable $e): \Illuminate\Http\Response|\Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse|\Symfony\Component\HttpFoundation\Response
     {
-        $code = $e->getCode() ? $e->getCode() : 500;
-        return response()->json(
-            [
-                'message' => $e->getMessage(),
-            ],
-            $code
-        );
+        if ($request->header('Content-Type') == 'application/json'){
+            $code = $e->getCode() ?: 500;
+            return response()->json(
+                [
+                    'message' => $e->getMessage(),
+                ],
+                $code
+            );
+        }
+        return parent::render($request, $e);
     }
 }

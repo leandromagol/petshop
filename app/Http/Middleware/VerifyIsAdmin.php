@@ -17,7 +17,7 @@ class VerifyIsAdmin
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if ($request->user()->is_admin) {
+        if ($request->user() instanceof User && $request->user()->is_admin) {
             return $next($request);
         }
         throw new UnauthorizedException('Unauthorized', 401);

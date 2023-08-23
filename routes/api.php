@@ -3,7 +3,9 @@
 
 use App\Http\Controllers\Api\V1\Admin\AdminController;
 use App\Http\Controllers\Api\V1\AuthController;
+use App\Http\Controllers\Api\V1\Product\ProductController;
 use Illuminate\Support\Facades\Route;
+use Leandroo\CurrencyExchangePackage\Controllers\ExchangeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,5 +27,14 @@ Route::prefix('v1')->group(function (): void {
             Route::controller(AdminController::class)->group(function (){
                 Route::post('create','create');
             });
+    });
+    Route::middleware(['auth:api_jwt'])->group(function (){
+        Route::controller(ProductController::class)->prefix('product')->group(function (){
+            Route::post('create','create');
+            Route::get('','index');
+            Route::get('/{uuid}','show');
+            Route::put('/{uuid}','update');
+            Route::delete('/{uuid}','destroy');
+        });
     });
 });

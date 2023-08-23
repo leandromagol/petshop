@@ -33,10 +33,9 @@ class AdminController
      * )
      * @throws \Exception
      */
-    public function create(CreateAdminRequest $request): \Illuminate\Http\JsonResponse
+    public function create(CreateAdminRequest $request, CreateAdminUseCase $createAdminUseCase): \Illuminate\Http\JsonResponse
     {
         $data = $request->validated();
-        $createAdminUseCase = new CreateAdminUseCase();
         $createAdminUseCase($data);
 
         return response()->json(['message' => 'Admin created successfully'], 201);
