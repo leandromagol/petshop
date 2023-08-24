@@ -371,6 +371,75 @@
                 ]
             }
         },
+        "/order-statuses": {
+            "get": {
+                "tags": [
+                    "OrderStatus"
+                ],
+                "summary": "Get a list of order statuses",
+                "operationId": "5fd1f8446a6b2e91943ce4cdd82758ca",
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/OrderStatus"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/order-statuses/{uuid}": {
+            "get": {
+                "tags": [
+                    "OrderStatus"
+                ],
+                "summary": "Get details of a specific order status",
+                "operationId": "d2c024c57048769c22e22d3dbde24577",
+                "parameters": [
+                    {
+                        "name": "uuid",
+                        "in": "path",
+                        "description": "Order Status uuid",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/OrderStatus"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Order Status not found"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
         "/api/v1/product": {
             "get": {
                 "tags": [
@@ -1026,6 +1095,25 @@
                         "description": "Date and time when the order was shipped",
                         "type": "string",
                         "format": "date-time"
+                    }
+                },
+                "type": "object"
+            },
+            "OrderStatus": {
+                "title": "OrderStatus",
+                "description": "Order status model",
+                "properties": {
+                    "id": {
+                        "description": "Order status ID",
+                        "type": "integer"
+                    },
+                    "uuid": {
+                        "description": "UUID of the order status",
+                        "type": "string"
+                    },
+                    "title": {
+                        "description": "Title of the order status",
+                        "type": "string"
                     }
                 },
                 "type": "object"

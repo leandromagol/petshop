@@ -158,6 +158,7 @@ class OrderController extends Controller
      *      ),
      *     @OA\Response(response="404", description="Order not found"),
      * )
+     * @throws \Throwable
      */
     public function update(UpdateOrderRequest $request, string $uuid,UpdateOrderUseCase $updateOrderUseCase): \Illuminate\Http\JsonResponse
     {

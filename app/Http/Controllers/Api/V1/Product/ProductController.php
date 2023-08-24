@@ -187,7 +187,7 @@ class ProductController extends Controller
      * )
      * @throws Exception
      */
-    public function update(UpdateProductRequest $request, $uuid, UpdateProductUseCase $updateProductUseCase)
+    public function update(UpdateProductRequest $request, $uuid, UpdateProductUseCase $updateProductUseCase): \Illuminate\Http\JsonResponse
     {
         $data = $request->validated();
         $product = $updateProductUseCase($data,$uuid);
@@ -224,7 +224,7 @@ class ProductController extends Controller
      *     }
      * )
      */
-    public function destroy($uuid)
+    public function destroy($uuid): \Illuminate\Http\JsonResponse
     {
         $product = Product::where('uuid',$uuid)->firstOrFail();
         $product->delete();

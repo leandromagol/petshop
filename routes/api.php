@@ -4,6 +4,7 @@
 use App\Http\Controllers\Api\V1\Admin\AdminController;
 use App\Http\Controllers\Api\V1\AuthController;
 use App\Http\Controllers\Api\V1\Order\OrderController;
+use App\Http\Controllers\Api\V1\Order\OrderStatusController;
 use App\Http\Controllers\Api\V1\Product\ProductController;
 use Illuminate\Support\Facades\Route;
 use Leandroo\OrderNotificationPackage\Events\OrderStatusUpdated;
@@ -46,5 +47,7 @@ Route::prefix('v1')->group(function (): void {
         });
         Route::get('orders',[OrderController::class,'index']);
 
+        Route::get('/order-status', [OrderStatusController::class, 'index']);
+        Route::get('/order-statuses/{uuid}', [OrderStatusController::class, 'show']);
     });
 });

@@ -1,11 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Leandroo\OrderNotificationPackage\Listeners;
 
-use Leandroo\OrderNotificationPackage\Events\OrderStatusUpdated;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Support\Facades\Http;
+use Leandroo\OrderNotificationPackage\Events\OrderStatusUpdated;
 
 class SendWebhookNotification implements ShouldQueue
 {
@@ -13,11 +15,8 @@ class SendWebhookNotification implements ShouldQueue
 
     /**
      * Handle the event.
-     *
-     * @param  OrderStatusUpdated  $event
-     * @return void
      */
-    public function handle(OrderStatusUpdated $event)
+    public function handle(OrderStatusUpdated $event): void
     {
         $webhookUrl = config('order-notification-package.webhook_url');
         $notificationCard = [

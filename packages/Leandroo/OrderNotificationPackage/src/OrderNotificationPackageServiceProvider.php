@@ -1,14 +1,18 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Leandroo\OrderNotificationPackage;
 
 use Illuminate\Support\ServiceProvider;
 
 class OrderNotificationPackageServiceProvider extends ServiceProvider
 {
-    function register(): void
+    public function register(): void
     {
         $this->mergeConfigFrom(
-            __DIR__.'/config/order-notification-package.php', 'order-notification-package'
+            __DIR__.'/config/order-notification-package.php',
+            'order-notification-package'
         );
     }
 
@@ -22,6 +26,4 @@ class OrderNotificationPackageServiceProvider extends ServiceProvider
             __DIR__.'/config/order-notification-package.php' => config_path('order-notification-package.php'),
         ], 'order-notification-package-config');
     }
-
-
 }
