@@ -2,7 +2,6 @@
 
 This Laravel package provides an easy way to send order status update notifications to Microsoft Teams via webhooks. 
 It utilizes Laravel's Events and Listeners system to trigger notifications when an order's status changes.
-
 ## Configuration
 Publish the package's configuration file:
 

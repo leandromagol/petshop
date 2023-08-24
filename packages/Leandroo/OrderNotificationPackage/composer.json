@@ -1,5 +1,6 @@
 {
     "name": "leandroo/order-notification-package",
+    "minimum-stability": "dev",
     "autoload": {
         "psr-4": {
             "Leandroo\\OrderNotificationPackage\\": "src/"
@@ -8,6 +9,7 @@
             "src/NotificationOrderStatusUpdater.php"
         ]
     },
+    "version": "0.0.1",
     "extra": {
         "laravel": {
             "providers": [

@@ -1,11 +1,13 @@
 {
     "name": "leandroo/currency-exchange-package",
     "description": "Currency exchange package for laravel",
+    "minimum-stability": "dev",
     "autoload": {
         "psr-4": {
                 "Leandroo\\CurrencyExchangePackage\\": "src/"
         }
     },
+    "version": "0.0.1",
     "extra": {
         "laravel": {
             "providers": [

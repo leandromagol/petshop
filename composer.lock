@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "48ca08b424d2ee91c5be5c1041209733",
+    "content-hash": "31071ddc98b78ef74ac6fa54b8934497",
     "packages": [
         {
             "name": "brick/math",
@@ -2025,6 +2025,78 @@
                 }
             ],
             "time": "2023-08-05T12:09:49+00:00"
+        },
+        {
+            "name": "leandroo/currency-exchange-package",
+            "version": "0.0.1",
+            "dist": {
+                "type": "path",
+                "url": "./packages/Leandroo/CurrencyExchangePackage",
+                "reference": "16cbd0ef769df166fbd13e958a9885abf91f9e0f"
+            },
+            "require": {
+                "php": "^8.1"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Leandroo\\CurrencyExchangePackage\\Support\\CurrencyExchangeProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Leandroo\\CurrencyExchangePackage\\": "src/"
+                }
+            },
+            "authors": [
+                {
+                    "name": "Leandro Oliveira",
+                    "email": "leandromagoliveira@gmail.co"
+                }
+            ],
+            "description": "Currency exchange package for laravel",
+            "transport-options": {
+                "relative": true
+            }
+        },
+        {
+            "name": "leandroo/order-notification-package",
+            "version": "0.0.1",
+            "dist": {
+                "type": "path",
+                "url": "./packages/Leandroo/OrderNotificationPackage",
+                "reference": "377505a4642675d784ab8e99009f27cb4ec60f70"
+            },
+            "require": {
+                "php": "^8.1"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Leandroo\\OrderNotificationPackage\\OrderNotificationPackageServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Leandroo\\OrderNotificationPackage\\": "src/"
+                },
+                "files": [
+                    "src/NotificationOrderStatusUpdater.php"
+                ]
+            },
+            "authors": [
+                {
+                    "name": "Leandro Oliveira",
+                    "email": "leandromagoliveira@gmail.co"
+                }
+            ],
+            "transport-options": {
+                "relative": true
+            }
         },
         {
             "name": "monolog/monolog",
@@ -11005,7 +11077,8 @@
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
-        "php": "^8.1"
+        "php": "^8.1",
+        "ext-simplexml": "*"
     },
     "platform-dev": [],
     "plugin-api-version": "2.3.0"
