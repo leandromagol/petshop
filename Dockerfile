@@ -46,6 +46,10 @@ RUN chmod 775 storage/logs \
         /var/www/storage/framework/sessions \
         /var/www/storage/framework/views \
 
+RUN php artisan db:migrate \
+    php artisan db:seed \
+    php artisan key:generate \
+
 # Run sh to generate openssl keys to authentication
 RUN ./generate_auth_keys.sh
 

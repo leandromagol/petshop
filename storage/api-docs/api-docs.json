@@ -125,6 +125,252 @@
                 ]
             }
         },
+        "/api/v1/orders": {
+            "get": {
+                "tags": [
+                    "Oders"
+                ],
+                "summary": "List orders",
+                "description": "Retrieves a list of all orders.",
+                "operationId": "listOders",
+                "parameters": [
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "Number of orders to retrieve (optional)",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "minimum": 1
+                        }
+                    },
+                    {
+                        "name": "sort_by",
+                        "in": "query",
+                        "description": "Sort orderss by field (optional)",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "enum": [
+                                "uuid",
+                                "user_id",
+                                "order_status_id",
+                                "products.*.product'"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "desc",
+                        "in": "query",
+                        "description": "Sort in descending order (optional)",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "enum": [
+                                0,
+                                1
+                            ]
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "$ref": "#/components/schemas/ListOrderRequest"
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/order/create": {
+            "post": {
+                "tags": [
+                    "Oders"
+                ],
+                "summary": "Create a new order",
+                "description": "Creates a new order.",
+                "operationId": "createOder",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CreateOrderRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Order created successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Order created successfully"
+                                        },
+                                        "data": {
+                                            "$ref": "#/components/schemas/Order"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/order/{uuid}": {
+            "get": {
+                "tags": [
+                    "Oders"
+                ],
+                "summary": "Get a specific order",
+                "operationId": "getOrderByUuid",
+                "parameters": [
+                    {
+                        "name": "uuid",
+                        "in": "path",
+                        "description": "UUID of the order to retrieve",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Order retrieved successfully"
+                                        },
+                                        "data": {
+                                            "$ref": "#/components/schemas/Order"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Order not found"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Oders"
+                ],
+                "summary": "Update a specific order",
+                "operationId": "updateOrder",
+                "parameters": [
+                    {
+                        "name": "uuid",
+                        "in": "path",
+                        "description": "UUID of the product",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UpdateOrderRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Product order successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Order updated successfully"
+                                        },
+                                        "data": {
+                                            "$ref": "#/components/schemas/Order"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Order not found"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Oders"
+                ],
+                "summary": "Delete a specific order",
+                "operationId": "deleteOrder",
+                "parameters": [
+                    {
+                        "name": "uuid",
+                        "in": "path",
+                        "description": "UUID of the order to delete",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Order deleted successfully"
+                    },
+                    "404": {
+                        "description": "Order not found"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
         "/api/v1/product": {
             "get": {
                 "tags": [
@@ -479,6 +725,154 @@
                 },
                 "type": "object"
             },
+            "CreateOrderRequest": {
+                "title": "Create Order Request",
+                "description": "Create Order Request body data",
+                "required": [
+                    "products",
+                    "address",
+                    "delivery_fee"
+                ],
+                "properties": {
+                    "products": {
+                        "description": "Array of products in the order",
+                        "type": "array",
+                        "items": {
+                            "required": [
+                                "product",
+                                "quantity"
+                            ],
+                            "properties": {
+                                "product": {
+                                    "description": "UUID of the product",
+                                    "type": "string",
+                                    "format": "uuid",
+                                    "example": "de305d54-75b4-431b-adb2-eb6b9e546014"
+                                },
+                                "quantity": {
+                                    "description": "Quantity of the product in the order",
+                                    "type": "integer",
+                                    "example": 2
+                                }
+                            },
+                            "type": "object"
+                        }
+                    },
+                    "address": {
+                        "description": "Address details",
+                        "required": [
+                            "billing",
+                            "shipping"
+                        ],
+                        "properties": {
+                            "billing": {
+                                "description": "Billing address",
+                                "type": "string"
+                            },
+                            "shipping": {
+                                "description": "Shipping address",
+                                "type": "string"
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "delivery_fee": {
+                        "description": "Delivery fee for the order",
+                        "type": "number",
+                        "format": "float"
+                    }
+                },
+                "type": "object"
+            },
+            "ListOrderRequest": {
+                "title": "ListOrderRequest",
+                "description": "List Order Request",
+                "properties": {
+                    "limit": {
+                        "type": "integer",
+                        "example": 10
+                    },
+                    "sort_by": {
+                        "type": "string",
+                        "enum": [
+                            "uuid",
+                            "user_id",
+                            "order_status_id",
+                            "products.*.product'"
+                        ]
+                    },
+                    "desc": {
+                        "type": "integer",
+                        "enum": [
+                            0,
+                            1
+                        ]
+                    }
+                },
+                "type": "object"
+            },
+            "UpdateOrderRequest": {
+                "title": "Update Order Request",
+                "description": "Update Order Request body data",
+                "required": [
+                    "order_status_id",
+                    "products",
+                    "address",
+                    "delivery_fee"
+                ],
+                "properties": {
+                    "order_status_id": {
+                        "description": "UUID of the order status for the order",
+                        "type": "string",
+                        "format": "uuid",
+                        "example": "de305d54-75b4-431b-adb2-eb6b9e546014"
+                    },
+                    "products": {
+                        "description": "Array of products in the order",
+                        "type": "array",
+                        "items": {
+                            "required": [
+                                "product",
+                                "quantity"
+                            ],
+                            "properties": {
+                                "product": {
+                                    "description": "UUID of the product",
+                                    "type": "string",
+                                    "format": "uuid",
+                                    "example": "de305d54-75b4-431b-adb2-eb6b9e546014"
+                                },
+                                "quantity": {
+                                    "description": "Quantity of the product in the order",
+                                    "type": "integer",
+                                    "example": 2
+                                }
+                            },
+                            "type": "object"
+                        }
+                    },
+                    "address": {
+                        "description": "Address details",
+                        "properties": {
+                            "billing": {
+                                "description": "Billing address",
+                                "type": "string"
+                            },
+                            "shipping": {
+                                "description": "Shipping address",
+                                "type": "string"
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "delivery_fee": {
+                        "description": "Delivery fee for the order",
+                        "type": "number",
+                        "format": "float"
+                    }
+                },
+                "type": "object"
+            },
             "CreateProductRequest": {
                 "title": "Create Product Request",
                 "description": "Create Product Request Body",
@@ -575,6 +969,67 @@
                 },
                 "type": "object"
             },
+            "Order": {
+                "title": "Order",
+                "description": "Order model",
+                "required": [
+                    "uuid",
+                    "user_id",
+                    "order_status_id",
+                    "products",
+                    "address",
+                    "delivery_fee",
+                    "amount",
+                    "shipped_at"
+                ],
+                "properties": {
+                    "uuid": {
+                        "description": "UUID of the order",
+                        "type": "string",
+                        "format": "uuid",
+                        "example": "de305d54-75b4-431b-adb2-eb6b9e546014"
+                    },
+                    "user_id": {
+                        "description": "UUID of the user associated with the order",
+                        "type": "string",
+                        "format": "uuid",
+                        "example": "de305d54-75b4-431b-adb2-eb6b9e546014"
+                    },
+                    "order_status_id": {
+                        "description": "UUID of the order status for the order",
+                        "type": "string",
+                        "format": "uuid",
+                        "example": "de305d54-75b4-431b-adb2-eb6b9e546014"
+                    },
+                    "products": {
+                        "description": "JSON array of products in the order",
+                        "type": "array",
+                        "items": {
+                            "type": "object"
+                        }
+                    },
+                    "address": {
+                        "description": "JSON object containing address details",
+                        "type": "object"
+                    },
+                    "delivery_fee": {
+                        "description": "Delivery fee for the order",
+                        "type": "number",
+                        "format": "float"
+                    },
+                    "amount": {
+                        "description": "Total amount for the order",
+                        "type": "number",
+                        "format": "float"
+                    },
+                    "shipped_at": {
+                        "description": "Date and time when the order was shipped",
+                        "type": "string",
+                        "format": "date-time"
+                    }
+                },
+                "type": "object"
+            },
             "Product": {
                 "title": "Product",
                 "description": "Product model",
@@ -638,6 +1093,10 @@
         {
             "name": "Authentication",
             "description": "Endpoints for user authentication"
+        },
+        {
+            "name": "Oders",
+            "description": "API Endpoints for Orders"
         },
         {
             "name": "Products",

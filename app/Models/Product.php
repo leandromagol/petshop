@@ -24,9 +24,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  *     @OA\Property(property="updated_at", type="string", format="date-time"),
  *     @OA\Property(property="deleted_at", type="string", format="date-time", nullable=true),
  * )
- *
+ * 
  *  App\Models\Product
- *
  * @property int $id
  * @property string $uuid
  * @property string $title

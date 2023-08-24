@@ -20,5 +20,8 @@ class DatabaseSeeder extends Seeder
              'email' => 'admin@buckhill.co.uk',
              'password'=>'admin'
          ]);
+         $this->call([
+             OrderStatusSeeder::class
+         ]);
     }
 }

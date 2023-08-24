@@ -3,6 +3,7 @@
 
 use App\Http\Controllers\Api\V1\Admin\AdminController;
 use App\Http\Controllers\Api\V1\AuthController;
+use App\Http\Controllers\Api\V1\Order\OrderController;
 use App\Http\Controllers\Api\V1\Product\ProductController;
 use Illuminate\Support\Facades\Route;
 use Leandroo\CurrencyExchangePackage\Controllers\ExchangeController;
@@ -36,5 +37,14 @@ Route::prefix('v1')->group(function (): void {
             Route::put('/{uuid}','update');
             Route::delete('/{uuid}','destroy');
         });
+
+        Route::controller(OrderController::class)->prefix('order')->group(function (){
+            Route::post('create','store');
+            Route::get('/{uuid}','show');
+            Route::put('/{uuid}','update');
+            Route::delete('/{uuid}','destroy');
+        });
+        Route::get('orders',[OrderController::class,'index']);
+
     });
 });
