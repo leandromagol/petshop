@@ -31,7 +31,9 @@
             "App\\": "app/",
             "Database\\Factories\\": "database/factories/",
             "Database\\Seeders\\": "database/seeders/",
-            "Leandroo\\CurrencyExchangePackage\\": "packages/Leandroo/CurrencyExchangePackage/src"
+            "Leandroo\\CurrencyExchangePackage\\": "packages/Leandroo/CurrencyExchangePackage/src",
+            "Leandroo\\OrderNotificationPackage\\": "packages/Leandroo/OrderNotificationPackage/src"
+
         }
     },
     "autoload-dev": {

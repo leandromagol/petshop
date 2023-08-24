@@ -168,7 +168,8 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-        Leandroo\CurrencyExchangePackage\Support\CurrencyExchangeProvider::class
+        Leandroo\CurrencyExchangePackage\Support\CurrencyExchangeProvider::class,
+        Leandroo\OrderNotificationPackage\Support\OrderNotificationPackageServiceProvider::class
     ])->toArray(),
 
     /*

@@ -6,7 +6,7 @@ use App\Http\Controllers\Api\V1\AuthController;
 use App\Http\Controllers\Api\V1\Order\OrderController;
 use App\Http\Controllers\Api\V1\Product\ProductController;
 use Illuminate\Support\Facades\Route;
-use Leandroo\CurrencyExchangePackage\Controllers\ExchangeController;
+use Leandroo\OrderNotificationPackage\Events\OrderStatusUpdated;
 
 /*
 |--------------------------------------------------------------------------

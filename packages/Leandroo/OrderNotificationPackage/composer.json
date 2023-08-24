@@ -1,15 +1,17 @@
 {
-    "name": "leandroo/currency-exchange-package",
-    "description": "Currency exchange package for laravel",
+    "name": "leandroo/order-notification-package",
     "autoload": {
         "psr-4": {
-                "Leandroo\\CurrencyExchangePackage\\": "src/"
-        }
+            "Leandroo\\OrderNotificationPackage\\": "src/"
+        },
+        "files": [
+            "src/NotificationOrderStatusUpdater.php"
+        ]
     },
     "extra": {
         "laravel": {
             "providers": [
-                "Leandroo\\CurrencyExchangePackage\\Support\\CurrencyExchangeProvider"
+                "Leandroo\\OrderNotificationPackage\\Support\\OrderNotificationPackageServiceProvider"
             ]
         }
     },
