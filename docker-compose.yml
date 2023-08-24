@@ -4,11 +4,18 @@ services:
             context: .
             dockerfile: Dockerfile
         container_name: app
+        depends_on:
+            - db
         restart: unless-stopped
         tty: true
+        env_file:
+            - .env
         environment:
             SERVICE_NAME: app
             SERVICE_TAGS: dev
+            DB_DATABASE: ${DB_DATABASE}
+            DB_USERNAME: ${DB_USERNAME}
+            DB_PASSWORD: ${DB_PASSWORD}
         working_dir: /var/www
         volumes:
             - ./:/var/www
@@ -42,11 +49,13 @@ services:
         tty: true
         ports:
             - "3306:3306"
+        env_file:
+            - .env
         environment:
-            MYSQL_DATABASE: laravel
+            MYSQL_DATABASE: ${DB_DATABASE}
             MYSQL_ROOT_PASSWORD: MYSQL_ROOT_PASSWORD
-            MYSQL_USER: laraveluser
-            MYSQL_PASSWORD: password
+            MYSQL_USER: ${DB_USERNAME}
+            MYSQL_PASSWORD: ${DB_PASSWORD}
             SERVICE_TAGS: dev
             SERVICE_NAME: mysql
         volumes:
