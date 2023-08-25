@@ -19,8 +19,8 @@ class ExchangeController
     public function getEuroExchangeValue(Request $request): JsonResponse
     {
         return $this->exchange->fetchCurrencyExchangeRates(
-            $request->input('currency',''),
-            $request->input('amount','')
+            $request->input('currency', ''),
+            $request->input('amount', '')
         );
     }
 }

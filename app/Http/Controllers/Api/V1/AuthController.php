@@ -1,6 +1,5 @@
 <?php
 
-
 namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Requests\Auth\LoginAuthRequest;
@@ -8,7 +7,6 @@ use App\Models\JwtToken;
 use App\UseCases\Auth\GenerateTokenUseCase;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 /**
  * @OA\Tag(

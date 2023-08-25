@@ -15,5 +15,4 @@ class PaginationDTO
     public function __construct(public int $limit, public string $sortBy, public bool $desc)
     {
     }
-
 }

@@ -14,15 +14,17 @@ class ListOrdersUseCase
 {
     /**
      * @param PaginationDTO $data
+     *
      * @return LengthAwarePaginator
+     *
      * @throws Exception
      */
     public function __invoke(PaginationDTO $data): LengthAwarePaginator
     {
         try {
-            $perPage = $data->limit ;
-            $sortBy = $data->sortBy ;
-            $sortDesc = $data->limit ;
+            $perPage = $data->limit;
+            $sortBy = $data->sortBy;
+            $sortDesc = $data->limit;
             $query = Order::query();
 
             $query->orderBy($sortBy, $sortDesc ? 'desc' : 'asc')

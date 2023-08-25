@@ -1,6 +1,7 @@
 <?php
 
 namespace App\DTO;
+
 use App\Models\Product;
 
 class CreateOrderDto
@@ -13,6 +14,7 @@ class CreateOrderDto
     public function __construct(
         public array $products,
         public array $address,
-        public float $deliveryFee) {
+        public float $deliveryFee
+    ) {
     }
 }

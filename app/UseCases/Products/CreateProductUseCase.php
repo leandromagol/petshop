@@ -6,12 +6,13 @@ use App\Models\Product;
 use Exception;
 use Illuminate\Support\Str;
 
-
 class CreateProductUseCase
 {
     /**
      * @param array<string, string> $data
+     *
      * @return Product
+     *
      * @throws Exception
      */
     public function __invoke(array $data): Product
@@ -28,10 +29,8 @@ class CreateProductUseCase
             $product->save();
 
             return $product;
-        }catch (Exception $exception){
+        } catch (Exception $exception) {
             throw new Exception($exception->getMessage(), 422);
-
         }
-
     }
 }

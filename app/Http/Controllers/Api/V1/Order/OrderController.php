@@ -13,7 +13,7 @@ use App\Models\Order;
 use App\UseCases\Order\CreateOrderUseCase;
 use App\UseCases\Order\ListOrdersUseCase;
 use App\UseCases\Order\UpdateOrderUseCase;
-use Illuminate\Http\Request;
+
 /**
  * @OA\Tag(
  *     name="Oders",
@@ -56,6 +56,7 @@ class OrderController extends Controller
      *     @OA\RequestBody(ref="#/components/schemas/ListOrderRequest"),
      *     @OA\Response(response="200", description="Successful operation"),
      * )
+     *
      * @throws \Exception
      */
     public function index(ListOrderRequest $request, ListOrdersUseCase $listOrdersUseCase): \Illuminate\Http\JsonResponse
@@ -63,8 +64,8 @@ class OrderController extends Controller
         $data = $request->validated();
         $paginationDto = new PaginationDTO(
             $data['limit'] ?? 10,
-            $data['sort_by']?? 'id',
-            $data['desc']?? false
+            $data['sort_by'] ?? 'id',
+            $data['desc'] ?? false
         );
         $orders = $listOrdersUseCase($paginationDto);
         return response()->json($orders);
@@ -93,9 +94,10 @@ class OrderController extends Controller
      *          )
      *      ),
      * )
+     *
      * @throws \Throwable
      */
-    public function store(CreateOrderRequest $request,CreateOrderUseCase $createOrderUseCase): \Illuminate\Http\JsonResponse
+    public function store(CreateOrderRequest $request, CreateOrderUseCase $createOrderUseCase): \Illuminate\Http\JsonResponse
     {
         $orderData = $request->validated();
         $createOrderDto = new CreateOrderDto(
@@ -105,8 +107,7 @@ class OrderController extends Controller
         );
 
         $order = $createOrderUseCase($createOrderDto);
-        return response()->json(['message'=>'Order created successfully', 'data'=>$order], 201);
-
+        return response()->json(['message' => 'Order created successfully', 'data' => $order], 201);
     }
 
     /**
@@ -138,8 +139,8 @@ class OrderController extends Controller
      */
     public function show(string $uuid): \Illuminate\Http\JsonResponse
     {
-        $order = Order::where('uuid',$uuid)->firstOrFail();
-        return response()->json(['message'=>'Order retrieved successfully','data'=>$order]);
+        $order = Order::where('uuid', $uuid)->firstOrFail();
+        return response()->json(['message' => 'Order retrieved successfully','data' => $order]);
     }
 
     /**
@@ -172,9 +173,10 @@ class OrderController extends Controller
      *      ),
      *     @OA\Response(response="404", description="Order not found"),
      * )
+     *
      * @throws \Throwable
      */
-    public function update(UpdateOrderRequest $request, string $uuid,UpdateOrderUseCase $updateOrderUseCase): \Illuminate\Http\JsonResponse
+    public function update(UpdateOrderRequest $request, string $uuid, UpdateOrderUseCase $updateOrderUseCase): \Illuminate\Http\JsonResponse
     {
         $orderData = $request->validated();
         $updateOrderDto = new UpdateOrderDto(
@@ -183,9 +185,8 @@ class OrderController extends Controller
             $orderData['address'],
             $orderData['delivery_fee']
         );
-        $updatedOrder = $updateOrderUseCase($updateOrderDto,$uuid);
-        return response()->json(['message'=>'Order updated successfully','data'=>$updatedOrder]);
-
+        $updatedOrder = $updateOrderUseCase($updateOrderDto, $uuid);
+        return response()->json(['message' => 'Order updated successfully','data' => $updatedOrder]);
     }
 
     /**
@@ -210,7 +211,7 @@ class OrderController extends Controller
      */
     public function destroy(string $uuid): \Illuminate\Http\JsonResponse
     {
-        $order = Order::where('uuid',$uuid)->firstOrFail();
+        $order = Order::where('uuid', $uuid)->firstOrFail();
         $order->delete();
 
         return response()->json(['message' => 'Product deleted successfully']);

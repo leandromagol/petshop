@@ -1,6 +1,7 @@
 <?php
 
 namespace App\DTO;
+
 use App\Models\Product;
 
 /**
@@ -18,6 +19,7 @@ class UpdateOrderDto
         public string $orderStatusId,
         public array $products,
         public array $address,
-        public float $deliveryFee) {
+        public float $deliveryFee
+    ) {
     }
 }

@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-
 /**
  * App\Models\Product
  *
@@ -26,6 +25,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * )
  *
  *  App\Models\Product
+ *
  * @property int $id
  * @property string $uuid
  * @property string $title
@@ -35,6 +35,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property \Illuminate\Support\Carbon $created_at
  * @property \Illuminate\Support\Carbon $updated_at
  * @property \Illuminate\Support\Carbon|null $deleted_at
+ *
  * @method static \Illuminate\Database\Eloquent\Builder|Product newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Product newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Product onlyTrashed()
@@ -50,6 +51,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Eloquent\Builder|Product whereUuid($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Product withTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder|Product withoutTrashed()
+ *
  * @mixin \Eloquent
  */
 class Product extends Model
@@ -58,7 +60,7 @@ class Product extends Model
     use SoftDeletes;
 
     /**
-     * @var string[]
+     * @var array<string>
      */
     protected $fillable = [
         'uuid',
@@ -68,7 +70,6 @@ class Product extends Model
         'metadata',
     ];
 
-
     /**
      * @var array<string, string>
      */
@@ -77,8 +78,7 @@ class Product extends Model
     ];
 
     /**
-     * @var array|string[]
+     * @var array<string>
      */
     protected array $dates = ['deleted_at'];
-
 }

@@ -1,6 +1,5 @@
 <?php
 
-
 namespace App\Exceptions;
 
 /**
@@ -8,12 +7,12 @@ namespace App\Exceptions;
  */
 class TokenNotProvided extends BaseApi
 {
-    /**
-     * @var string
-     */
-    protected  $message = 'Token not provided';
-    /**
-     * @var int
-     */
-    protected  $code = 422;
+/**
+ * @var string
+ */
+    protected $message = 'Token not provided';
+/**
+ * @var int
+ */
+    protected $code = 422;
 }

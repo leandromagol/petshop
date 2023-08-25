@@ -10,6 +10,7 @@ class CreateAdminUseCase
 {
     /**
      * @throws Exception
+     *
      * @param array<string, string> $data
      */
     public function __invoke(array $data): \Illuminate\Database\Eloquent\Model|User
@@ -28,10 +29,9 @@ class CreateAdminUseCase
                 'address' => $data['address'],
                 'phone_number' => $data['phone_number'],
             ]);
-        }catch (Exception $exception){
+        } catch (Exception $exception) {
             throw  new Exception($exception->getMessage(), 500);
         }
-
     }
 
     public function uuid(): string

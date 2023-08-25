@@ -1,6 +1,5 @@
 <?php
 
-
 namespace App\Providers;
 
 use App\Models\Order;
@@ -28,7 +27,6 @@ class EventServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Order::Observe(OrderObserver::class);
-
     }
 
     /**

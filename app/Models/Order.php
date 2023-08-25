@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+
 /**
  * @OA\Schema(
  *     schema="Order",
@@ -66,9 +67,11 @@ use Illuminate\Database\Eloquent\Model;
  *
  * @property-read \App\Models\OrderStatus|null $orderStatus
  * @property-read \App\Models\User $user
+ *
  * @method static \Illuminate\Database\Eloquent\Builder|Order newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Order newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Order query()
+ *
  * @mixin \Eloquent
  */
 
@@ -83,9 +86,9 @@ class Order extends Model
     protected $fillable = [
         'uuid',
         'user_id',
-        'order_status_id' ,
+        'order_status_id',
         'products',
-        'address' ,
+        'address',
         'delivery_fee',
         'amount',
         'shipped_at',
@@ -99,13 +102,11 @@ class Order extends Model
 
     public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
-        return $this->belongsTo(User::class,'user_id','uuid');
+        return $this->belongsTo(User::class, 'user_id', 'uuid');
     }
-
 
     public function orderStatus(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
-        return $this->belongsTo(OrderStatus::class,'order_status_id','uuid');
+        return $this->belongsTo(OrderStatus::class, 'order_status_id', 'uuid');
     }
-
 }

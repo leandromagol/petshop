@@ -5,8 +5,6 @@ namespace App\Http\Controllers\Api\V1\Order;
 use App\Http\Controllers\Controller;
 use App\Models\OrderStatus;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 
 class OrderStatusController extends Controller
 {
@@ -58,11 +56,12 @@ class OrderStatusController extends Controller
      *  )
      *
      * @param string $uuid
+     *
      * @return JsonResponse
      */
     public function show(string $uuid): \Illuminate\Http\JsonResponse
     {
-        $orderStatus = OrderStatus::where('uuid',$uuid)->firstOrFail();
+        $orderStatus = OrderStatus::where('uuid', $uuid)->firstOrFail();
         return response()->json($orderStatus);
     }
 }

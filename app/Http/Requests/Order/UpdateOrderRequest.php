@@ -4,6 +4,7 @@ namespace App\Http\Requests\Order;
 
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
+
 /**
  * @OA\Schema(
  *     schema="UpdateOrderRequest",

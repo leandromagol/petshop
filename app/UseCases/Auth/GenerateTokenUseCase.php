@@ -1,6 +1,5 @@
 <?php
 
-
 namespace App\UseCases\Auth;
 
 use App\Models\JwtToken;
@@ -23,9 +22,8 @@ class GenerateTokenUseCase
     {
         $credentials = ['email' => $email, 'password' => $password];
         if (Auth::attempt($credentials)) {
-
             $user = Auth::user();
-            if ($user instanceof User){
+            if ($user instanceof User) {
                 $privateKey = config('app.jwt_private_key');
                 $token = JWT::encode([
                     'sub' => $user->id,
@@ -41,9 +39,9 @@ class GenerateTokenUseCase
         throw new AuthenticationException();
     }
 
-
     /**
      * @param User $user
+     *
      * @return void
      */
     private function storeJwt(User $user): void

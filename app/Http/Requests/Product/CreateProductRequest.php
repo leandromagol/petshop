@@ -4,7 +4,7 @@ namespace App\Http\Requests\Product;
 
 use App\Http\Requests\BaseRequest;
 use App\Rules\ObjectOrJsonRule;
-use Illuminate\Contracts\Validation\ValidationRule;
+
 /**
  * @OA\Schema(
  *     title="Create Product Request",
@@ -62,7 +62,7 @@ class CreateProductRequest extends BaseRequest
             'title' => 'required|string',
             'price' => 'required|numeric',
             'description' => 'required|string',
-            'metadata' => ['required',new ObjectOrJsonRule],
+            'metadata' => ['required',new ObjectOrJsonRule()],
         ];
     }
 }

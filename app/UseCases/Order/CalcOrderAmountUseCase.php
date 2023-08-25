@@ -5,11 +5,11 @@ namespace App\UseCases\Order;
 use App\Models\Product;
 use Exception;
 
-
 class CalcOrderAmountUseCase
 {
     /**
      * @param array<mixed> $products
+     *
      * @throws Exception
      */
     public function __invoke(array $products): float|int
@@ -19,7 +19,7 @@ class CalcOrderAmountUseCase
         foreach ($products as $productData) {
             $product = Product::where('uuid', $productData['product'])->first();
 
-            if (!$product) {
+            if (! $product) {
                 throw new Exception("Product not found: {$productData['product']}");
             }
 

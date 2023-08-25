@@ -1,6 +1,5 @@
 <?php
 
-
 namespace App\Http\Requests\Auth;
 
 use App\Http\Requests\BaseRequest;
@@ -9,6 +8,7 @@ use Illuminate\Contracts\Validation\ValidationRule;
 /**
  * @property string $email
  * @property string $password
+ *
  * @OA\Schema(
  *     title="Login Request",
  *     description="Login request payload",

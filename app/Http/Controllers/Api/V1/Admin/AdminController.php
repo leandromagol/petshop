@@ -31,6 +31,7 @@ class AdminController
      *         description="Validation error"
      *     ),
      * )
+     *
      * @throws \Exception
      */
     public function create(CreateAdminRequest $request, CreateAdminUseCase $createAdminUseCase): \Illuminate\Http\JsonResponse
@@ -39,6 +40,5 @@ class AdminController
         $createAdminUseCase($data);
 
         return response()->json(['message' => 'Admin created successfully'], 201);
-
     }
 }

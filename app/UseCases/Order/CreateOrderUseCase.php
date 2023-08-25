@@ -5,7 +5,6 @@ namespace App\UseCases\Order;
 use App\DTO\CreateOrderDto;
 use App\Models\Order;
 use App\Models\OrderStatus;
-use App\Models\Product;
 use Auth;
 use Illuminate\Support\Facades\DB;
 use Str;
@@ -22,7 +21,7 @@ class CreateOrderUseCase
             $calOrderAmountUseCase = new CalcOrderAmountUseCase();
 
             $totalAmount = $calOrderAmountUseCase($products);
-            $orderOpened = OrderStatus::where('title','open')->firstOrFail();
+            $orderOpened = OrderStatus::where('title', 'open')->firstOrFail();
             return Order::create([
                 'user_id' => Auth::user()->uuid,// @phpstan-ignore-line
                 'order_status_id' => $orderOpened->uuid,

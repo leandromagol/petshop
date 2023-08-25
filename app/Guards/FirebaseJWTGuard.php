@@ -1,11 +1,9 @@
 <?php
 
-
 namespace App\Guards;
 
 use App\Exceptions\InvalidToken;
 use App\Exceptions\TokenNotProvided;
-use App\Models\JwtToken;
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
 use Illuminate\Auth\GuardHelpers;
@@ -47,6 +45,7 @@ class FirebaseJWTGuard implements Guard
 
     /**
      * @return \Illuminate\Contracts\Auth\Authenticatable|null
+     *
      * @throws InvalidToken
      */
     public function user(): ?\Illuminate\Contracts\Auth\Authenticatable
@@ -56,7 +55,6 @@ class FirebaseJWTGuard implements Guard
         }
 
         try {
-
             $token = $this->decodeToken($this->getTokenForRequest());
             return $this->provider->retrieveByCredentials(['uuid' => $token->user_uuid]);
         } catch (\Exception $e) {
@@ -66,6 +64,7 @@ class FirebaseJWTGuard implements Guard
 
     /**
      * @param array<string> $credentials
+     *
      * @return bool|\Illuminate\Contracts\Auth\Authenticatable|null
      */
     public function validate(array $credentials = ['token']): bool|\Illuminate\Contracts\Auth\Authenticatable|null
@@ -83,6 +82,7 @@ class FirebaseJWTGuard implements Guard
 
     /**
      * @param string $token
+     *
      * @return stdClass
      */
     protected function decodeToken(string $token): stdClass

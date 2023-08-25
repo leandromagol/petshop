@@ -4,14 +4,14 @@ namespace App\Http\Requests\Product;
 
 use App\Http\Requests\BaseRequest;
 use App\Rules\ObjectOrJsonRule;
-use Illuminate\Contracts\Validation\ValidationRule;
+
 /**
  * @OA\Schema(
  *     schema="UpdateProductRequest",
  *     title="UpdateProductRequest",
  *     description="Update Product Request",
  *     required={"title", "price", "description", "metadata"},
-*      @OA\Property(
+ *      @OA\Property(
  *         property="title",
  *         description="Title of the product",
  *         type="string",

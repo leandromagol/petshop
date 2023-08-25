@@ -4,6 +4,7 @@ namespace App\Http\Requests\Order;
 
 use App\Http\Requests\BaseRequest;
 use Illuminate\Contracts\Validation\ValidationRule;
+
 /**
  * @OA\Schema(
  *     schema="ListOrderRequest",

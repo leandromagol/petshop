@@ -12,8 +12,7 @@ use App\UseCases\Products\CreateProductUseCase;
 use App\UseCases\Products\ListProductsUseCase;
 use App\UseCases\Products\UpdateProductUseCase;
 use Exception;
-use League\Container\Exception\NotFoundException;
-use Request;
+
 /**
  * @OA\Tag(
  *     name="Products",
@@ -66,6 +65,7 @@ class ProductController extends Controller
      *         {"bearerAuth": {}}
      *     }
      * )
+     *
      * @throws Exception
      */
     public function index(ListProductRequest $request, ListProductsUseCase $listProductsUseCase): \Illuminate\Http\JsonResponse
@@ -73,12 +73,11 @@ class ProductController extends Controller
         $data = $request->validated();
         $paginationDto = new PaginationDTO(
             $data['limit'] ?? 10,
-            $data['sort_by']?? 'id',
-            $data['desc']?? false
+            $data['sort_by'] ?? 'id',
+            $data['desc'] ?? false
         );
         $products = $listProductsUseCase($paginationDto);
         return response()->json(['message' => 'Products retrieved successfully', 'data' => $products]);
-
     }
     /**
      * @OA\Post(
@@ -107,6 +106,7 @@ class ProductController extends Controller
      *         {"bearerAuth": {}}
      *     }
      * )
+     *
      * @throws Exception
      */
     public function create(CreateProductRequest $request, CreateProductUseCase $createProductUseCase): \Illuminate\Http\JsonResponse
@@ -149,8 +149,8 @@ class ProductController extends Controller
      */
     public function show(string $uuid): \Illuminate\Http\JsonResponse
     {
-        $product = Product::where('uuid',$uuid)->firstOrFail();
-        return response()->json(['message'=>'Product retrieved successfully','data'=>$product]);
+        $product = Product::where('uuid', $uuid)->firstOrFail();
+        return response()->json(['message' => 'Product retrieved successfully','data' => $product]);
     }
 
     /**
@@ -191,14 +191,15 @@ class ProductController extends Controller
      *         {"bearerAuth": {}}
      *     }
      * )
+     *
      * @throws Exception
      */
     public function update(UpdateProductRequest $request, string $uuid, UpdateProductUseCase $updateProductUseCase): \Illuminate\Http\JsonResponse
     {
         $data = $request->validated();
-        $product = $updateProductUseCase($data,$uuid);
+        $product = $updateProductUseCase($data, $uuid);
 
-        return response()->json(['message'=>'Product updated successfully','data'=>$product]);
+        return response()->json(['message' => 'Product updated successfully','data' => $product]);
     }
     /**
      * @OA\Delete(
@@ -232,7 +233,7 @@ class ProductController extends Controller
      */
     public function destroy(string $uuid): \Illuminate\Http\JsonResponse
     {
-        $product = Product::where('uuid',$uuid)->firstOrFail();
+        $product = Product::where('uuid', $uuid)->firstOrFail();
         $product->delete();
 
         return response()->json(['message' => 'Product deleted successfully']);

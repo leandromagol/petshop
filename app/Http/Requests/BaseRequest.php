@@ -1,6 +1,5 @@
 <?php
 
-
 namespace App\Http\Requests;
 
 use Illuminate\Contracts\Validation\Validator;

@@ -1,13 +1,11 @@
 <?php
 
-
 use App\Http\Controllers\Api\V1\Admin\AdminController;
 use App\Http\Controllers\Api\V1\AuthController;
 use App\Http\Controllers\Api\V1\Order\OrderController;
 use App\Http\Controllers\Api\V1\Order\OrderStatusController;
 use App\Http\Controllers\Api\V1\Product\ProductController;
 use Illuminate\Support\Facades\Route;
-use Leandroo\OrderNotificationPackage\Events\OrderStatusUpdated;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,27 +23,27 @@ Route::prefix('v1')->group(function (): void {
         Route::get('logout', 'logout')->middleware('auth:api_jwt');
     });
     Route::prefix('admin')
-        ->middleware(['auth:api_jwt','verifyIsAdmin'])->group(function (){
-            Route::controller(AdminController::class)->group(function (){
-                Route::post('create','create');
+        ->middleware(['auth:api_jwt','verifyIsAdmin'])->group(function () {
+            Route::controller(AdminController::class)->group(function () {
+                Route::post('create', 'create');
             });
-    });
-    Route::middleware(['auth:api_jwt'])->group(function (){
-        Route::controller(ProductController::class)->prefix('product')->group(function (){
-            Route::post('create','create');
-            Route::get('','index');
-            Route::get('/{uuid}','show');
-            Route::put('/{uuid}','update');
-            Route::delete('/{uuid}','destroy');
+        });
+    Route::middleware(['auth:api_jwt'])->group(function () {
+        Route::controller(ProductController::class)->prefix('product')->group(function () {
+            Route::post('create', 'create');
+            Route::get('', 'index');
+            Route::get('/{uuid}', 'show');
+            Route::put('/{uuid}', 'update');
+            Route::delete('/{uuid}', 'destroy');
         });
 
-        Route::controller(OrderController::class)->prefix('order')->group(function (){
-            Route::post('create','store');
-            Route::get('/{uuid}','show');
-            Route::put('/{uuid}','update');
-            Route::delete('/{uuid}','destroy');
+        Route::controller(OrderController::class)->prefix('order')->group(function () {
+            Route::post('create', 'store');
+            Route::get('/{uuid}', 'show');
+            Route::put('/{uuid}', 'update');
+            Route::delete('/{uuid}', 'destroy');
         });
-        Route::get('orders',[OrderController::class,'index']);
+        Route::get('orders', [OrderController::class,'index']);
 
         Route::get('/order-statuses', [OrderStatusController::class, 'index']);
         Route::get('/order-status/{uuid}', [OrderStatusController::class, 'show']);
