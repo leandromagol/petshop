@@ -46,7 +46,7 @@ class UpdateProductRequest extends BaseRequest
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array<string, ValidationRule|array|string>
+     * @return array<string, array<int,ObjectOrJsonRule|string>|string>
      */
     public function rules(): array
     {
@@ -54,7 +54,7 @@ class UpdateProductRequest extends BaseRequest
             'title' => 'required|string',
             'price' => 'required|numeric',
             'description' => 'required|string',
-            'metadata' => ['required',new ObjectOrJsonRule],
+            'metadata' => ['required',new ObjectOrJsonRule()],
         ];
     }
 }

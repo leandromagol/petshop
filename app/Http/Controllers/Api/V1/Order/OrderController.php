@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers\Api\V1\Order;
 
+use App\DTO\CreateOrderDto;
+use App\DTO\PaginationDTO;
+use App\DTO\UpdateOrderDto;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Order\CreateOrderRequest;
 use App\Http\Requests\Order\ListOrderRequest;
@@ -57,8 +60,13 @@ class OrderController extends Controller
      */
     public function index(ListOrderRequest $request, ListOrdersUseCase $listOrdersUseCase): \Illuminate\Http\JsonResponse
     {
-
-        $orders = $listOrdersUseCase($request->all());
+        $data = $request->validated();
+        $paginationDto = new PaginationDTO(
+            $data['limit'] ?? 10,
+            $data['sort_by']?? 'id',
+            $data['desc']?? false
+        );
+        $orders = $listOrdersUseCase($paginationDto);
         return response()->json($orders);
     }
 
@@ -85,12 +93,18 @@ class OrderController extends Controller
      *          )
      *      ),
      * )
+     * @throws \Throwable
      */
     public function store(CreateOrderRequest $request,CreateOrderUseCase $createOrderUseCase): \Illuminate\Http\JsonResponse
     {
         $orderData = $request->validated();
+        $createOrderDto = new CreateOrderDto(
+            $orderData['products'],
+            $orderData['address'],
+            $orderData['delivery_fee']
+        );
 
-        $order = $createOrderUseCase($orderData);
+        $order = $createOrderUseCase($createOrderDto);
         return response()->json(['message'=>'Order created successfully', 'data'=>$order], 201);
 
     }
@@ -140,7 +154,7 @@ class OrderController extends Controller
      *       @OA\Parameter(
      *          name="uuid",
      *          in="path",
-     *          description="UUID of the product",
+     *          description="UUID of the order",
      *          required=true,
      *          @OA\Schema(type="string")
      *      ),
@@ -150,7 +164,7 @@ class OrderController extends Controller
      *      ),
      * @OA\Response(
      *          response=200,
-     *          description="Product order successfully",
+     *          description="Order order successfully",
      *          @OA\JsonContent(
      *              @OA\Property(property="message", type="string", example="Order updated successfully"),
      *              @OA\Property(property="data", ref="#/components/schemas/Order")
@@ -163,8 +177,13 @@ class OrderController extends Controller
     public function update(UpdateOrderRequest $request, string $uuid,UpdateOrderUseCase $updateOrderUseCase): \Illuminate\Http\JsonResponse
     {
         $orderData = $request->validated();
-
-        $updatedOrder = $updateOrderUseCase($orderData,$uuid);
+        $updateOrderDto = new UpdateOrderDto(
+            $orderData['order_status_id'],
+            $orderData['products'],
+            $orderData['address'],
+            $orderData['delivery_fee']
+        );
+        $updatedOrder = $updateOrderUseCase($updateOrderDto,$uuid);
         return response()->json(['message'=>'Order updated successfully','data'=>$updatedOrder]);
 
     }

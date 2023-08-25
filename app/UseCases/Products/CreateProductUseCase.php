@@ -10,7 +10,7 @@ use Illuminate\Support\Str;
 class CreateProductUseCase
 {
     /**
-     * @param array $data
+     * @param array<string, string> $data
      * @return Product
      * @throws Exception
      */

@@ -2,21 +2,27 @@
 
 namespace App\UseCases\Order;
 
+use App\DTO\PaginationDTO;
 use App\Models\Order;
 use Exception;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
+/**
+ *
+ */
 class ListOrdersUseCase
 {
     /**
+     * @param PaginationDTO $data
+     * @return LengthAwarePaginator
      * @throws Exception
      */
-    public function __invoke(array $data): LengthAwarePaginator
+    public function __invoke(PaginationDTO $data): LengthAwarePaginator
     {
         try {
-            $perPage = $data['limit'] ?? 10;
-            $sortBy = $data['sort_by'] ?? 'id';
-            $sortDesc = $data['sort_desc'] ?? false;
+            $perPage = $data->limit ;
+            $sortBy = $data->sortBy ;
+            $sortDesc = $data->limit ;
             $query = Order::query();
 
             $query->orderBy($sortBy, $sortDesc ? 'desc' : 'asc')

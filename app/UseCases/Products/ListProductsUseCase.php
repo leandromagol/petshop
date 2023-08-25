@@ -2,6 +2,7 @@
 
 namespace App\UseCases\Products;
 
+use App\DTO\PaginationDTO;
 use App\Models\Product;
 use Exception;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
@@ -9,14 +10,16 @@ use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 class ListProductsUseCase
 {
     /**
+     * @param PaginationDTO $data
+     * @return LengthAwarePaginator
      * @throws Exception
      */
-    public function __invoke(array $data): LengthAwarePaginator
+    public function __invoke(PaginationDTO $data): LengthAwarePaginator
     {
         try {
-            $perPage =$data['limit'] ?? 10;
-            $sortBy =$data['sort_by'] ?? 'id';
-            $sortDesc =$data['sort_desc'] ?? false;
+            $perPage = $data->limit ;
+            $sortBy = $data->sortBy ;
+            $sortDesc = $data->limit ;
             $query = Product::query();
 
             $query->orderBy($sortBy, $sortDesc ? 'desc' : 'asc');

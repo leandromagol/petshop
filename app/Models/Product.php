@@ -24,7 +24,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  *     @OA\Property(property="updated_at", type="string", format="date-time"),
  *     @OA\Property(property="deleted_at", type="string", format="date-time", nullable=true),
  * )
- * 
+ *
  *  App\Models\Product
  * @property int $id
  * @property string $uuid
@@ -57,6 +57,9 @@ class Product extends Model
     use HasFactory;
     use SoftDeletes;
 
+    /**
+     * @var string[]
+     */
     protected $fillable = [
         'uuid',
         'title',
@@ -66,10 +69,16 @@ class Product extends Model
     ];
 
 
+    /**
+     * @var array<string, string>
+     */
     protected $casts = [
         'metadata' => 'json',
     ];
 
-    protected $dates = ['deleted_at'];
+    /**
+     * @var array|string[]
+     */
+    protected array $dates = ['deleted_at'];
 
 }

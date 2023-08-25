@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api\V1\Product;
 
+use App\DTO\PaginationDTO;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Product\CreateProductRequest;
 use App\Http\Requests\Product\ListProductRequest;
@@ -70,7 +71,12 @@ class ProductController extends Controller
     public function index(ListProductRequest $request, ListProductsUseCase $listProductsUseCase): \Illuminate\Http\JsonResponse
     {
         $data = $request->validated();
-        $products = $listProductsUseCase($data);
+        $paginationDto = new PaginationDTO(
+            $data['limit'] ?? 10,
+            $data['sort_by']?? 'id',
+            $data['desc']?? false
+        );
+        $products = $listProductsUseCase($paginationDto);
         return response()->json(['message' => 'Products retrieved successfully', 'data' => $products]);
 
     }
@@ -141,7 +147,7 @@ class ProductController extends Controller
      *     }
      * )
      */
-    public function show($uuid): \Illuminate\Http\JsonResponse
+    public function show(string $uuid): \Illuminate\Http\JsonResponse
     {
         $product = Product::where('uuid',$uuid)->firstOrFail();
         return response()->json(['message'=>'Product retrieved successfully','data'=>$product]);
@@ -187,7 +193,7 @@ class ProductController extends Controller
      * )
      * @throws Exception
      */
-    public function update(UpdateProductRequest $request, $uuid, UpdateProductUseCase $updateProductUseCase): \Illuminate\Http\JsonResponse
+    public function update(UpdateProductRequest $request, string $uuid, UpdateProductUseCase $updateProductUseCase): \Illuminate\Http\JsonResponse
     {
         $data = $request->validated();
         $product = $updateProductUseCase($data,$uuid);
@@ -224,7 +230,7 @@ class ProductController extends Controller
      *     }
      * )
      */
-    public function destroy($uuid): \Illuminate\Http\JsonResponse
+    public function destroy(string $uuid): \Illuminate\Http\JsonResponse
     {
         $product = Product::where('uuid',$uuid)->firstOrFail();
         $product->delete();

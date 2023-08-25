@@ -292,7 +292,7 @@
                     {
                         "name": "uuid",
                         "in": "path",
-                        "description": "UUID of the product",
+                        "description": "UUID of the order",
                         "required": true,
                         "schema": {
                             "type": "string"
@@ -311,7 +311,7 @@
                 },
                 "responses": {
                     "200": {
-                        "description": "Product order successfully",
+                        "description": "Order order successfully",
                         "content": {
                             "application/json": {
                                 "schema": {

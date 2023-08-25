@@ -97,13 +97,13 @@ class Order extends Model
         'shipped_at' => 'datetime',
     ];
 
-    public function user()
+    public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(User::class,'user_id','uuid');
     }
 
 
-    public function orderStatus()
+    public function orderStatus(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(OrderStatus::class,'order_status_id','uuid');
     }

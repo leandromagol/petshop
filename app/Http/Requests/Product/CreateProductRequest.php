@@ -54,7 +54,7 @@ class CreateProductRequest extends BaseRequest
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array<string, ValidationRule|array|string>
+     * @return array<string, array<int,ObjectOrJsonRule|string>|string>
      */
     public function rules(): array
     {

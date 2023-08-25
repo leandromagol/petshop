@@ -24,7 +24,7 @@ class ListOrderRequest extends BaseRequest
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array<string, ValidationRule|array|string>
+     * @return array<string, ValidationRule|string>
      */
     public function rules(): array
     {

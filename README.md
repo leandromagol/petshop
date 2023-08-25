@@ -38,3 +38,7 @@ The builtin user is
   
 }
 ```
+
+##Packages
+
+Inside the directory packages has the CurrencyExchangePackage and OrderNotificationPackage with their respective readmes 

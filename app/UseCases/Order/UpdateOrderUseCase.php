@@ -3,32 +3,36 @@
 namespace App\UseCases\Order;
 
 
+use App\DTO\UpdateOrderDto;
 use App\Models\Order;
 use App\Models\OrderStatus;
-use App\Models\Product;
 use Illuminate\Support\Facades\DB;
+
 
 class UpdateOrderUseCase
 {
     /**
+     * @param UpdateOrderDto $orderData
+     * @param string $uuid
+     * @return Order
      * @throws \Throwable
      */
-    public function __invoke(array $orderData, string $uuid)
+    public function __invoke(UpdateOrderDto $orderData, string $uuid) : Order
     {
         $order = Order::where('uuid',$uuid)->firstOrFail();
         return DB::transaction(function () use ($order, $orderData) {
-            $products = $orderData['products'];
+            $products = $orderData->products;
             $calOrderAmountUseCase = new CalcOrderAmountUseCase();
 
             $totalAmount = $calOrderAmountUseCase($products);
 
-            $orderStatus = OrderStatus::where('uuid', $orderData['order_status_id'])->first();
+            $orderStatus = OrderStatus::where('uuid', $orderData->orderStatusId)->first();
 
             $order->update([
                 'order_status_id' => $orderStatus->uuid ?? $order->order_status_uuid,
-                'products' => $products, // Store the array of products as-is
-                'address' => $orderData['address'],
-                'delivery_fee' => $orderData['delivery_fee'],
+                'products' => $products,
+                'address' => $orderData->address,
+                'delivery_fee' => $orderData->deliveryFee,
                 'amount' => $totalAmount,
             ]);
 
