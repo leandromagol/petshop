@@ -14,14 +14,9 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
 
-         User::factory()->create([
-             'first_name' => 'admin',
-             'last_name' =>'buckhill',
-             'email' => 'admin@buckhill.co.uk',
-             'password'=>'admin'
-         ]);
          $this->call([
-             OrderStatusSeeder::class
+             OrderStatusSeeder::class,
+             AdminSeeder::class
          ]);
     }
 }

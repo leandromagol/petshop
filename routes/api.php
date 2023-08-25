@@ -47,7 +47,7 @@ Route::prefix('v1')->group(function (): void {
         });
         Route::get('orders',[OrderController::class,'index']);
 
-        Route::get('/order-status', [OrderStatusController::class, 'index']);
-        Route::get('/order-statuses/{uuid}', [OrderStatusController::class, 'show']);
+        Route::get('/order-statuses', [OrderStatusController::class, 'index']);
+        Route::get('/order-status/{uuid}', [OrderStatusController::class, 'show']);
     });
 });

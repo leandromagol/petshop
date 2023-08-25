@@ -12,7 +12,7 @@ class OrderStatusController extends Controller
 {
     /**
      * @OA\Get(
-     *      path="/order-statuses",
+     *      path="/api/v1/order-statuses",
      *      summary="Get a list of order statuses",
      *      tags={"OrderStatus"},
      *      security={{"bearerAuth": {}}},
@@ -36,7 +36,7 @@ class OrderStatusController extends Controller
 
     /**
      * @OA\Get(
-     *      path="/order-statuses/{uuid}",
+     *      path="/api/v1/order-status/{uuid}",
      *      summary="Get details of a specific order status",
      *      tags={"OrderStatus"},
      *      security={{"bearerAuth": {}}},

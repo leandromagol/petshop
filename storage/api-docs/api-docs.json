@@ -371,13 +371,13 @@
                 ]
             }
         },
-        "/order-statuses": {
+        "/api/v1/order-statuses": {
             "get": {
                 "tags": [
                     "OrderStatus"
                 ],
                 "summary": "Get a list of order statuses",
-                "operationId": "5fd1f8446a6b2e91943ce4cdd82758ca",
+                "operationId": "d0910727c8e9ce95d041468cee3bf516",
                 "responses": {
                     "200": {
                         "description": "Successful response",
@@ -400,13 +400,13 @@
                 ]
             }
         },
-        "/order-statuses/{uuid}": {
+        "/api/v1/order-status/{uuid}": {
             "get": {
                 "tags": [
                     "OrderStatus"
                 ],
                 "summary": "Get details of a specific order status",
-                "operationId": "d2c024c57048769c22e22d3dbde24577",
+                "operationId": "e8663a63c2b4093e237493ac39815db3",
                 "parameters": [
                     {
                         "name": "uuid",
