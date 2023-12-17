@@ -6,7 +6,7 @@ Petshop api built using laravel framework
 ## 💻 Setup
 You will need docker installed in your environment to run this project properly
 
-1.Copy the .env-example to .env and put your database credentials and your webhook to get the orders status updates 
+1. Copy the .env-example to .env and put your database credentials and your webhook to get the orders status updates 
 ```bash
 DB_DATABASE=laravel
 DB_USERNAME=root
@@ -39,6 +39,6 @@ The builtin user is
 }
 ```
 
-##Packages
+## Packages
 
 Inside the directory packages has the CurrencyExchangePackage and OrderNotificationPackage with their respective readmes 
