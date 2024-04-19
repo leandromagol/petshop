@@ -32,7 +32,7 @@ The builtin user is
 ```json
 {
   
-  "email": "admin@buckhill.co.uk",
+  "email": "admin@admin",
   "password": "admin",
   
   
